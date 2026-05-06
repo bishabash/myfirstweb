@@ -1,60 +1,634 @@
 <!DOCTYPE html>
-
 <html lang="en">
-  <head>
-    
-    <title>CatPhotoApp</title>
-  </head>
-  <body>
-    <main>
-      <h1>CatPhotoApp</h1>
-      <section>
-        <h2>Cat Photos</h2>
-        <p>Everyone loves <a href="https://cdn.freecodecamp.org/curriculum/cat-photo-app/running-cats.jpg">cute cats</a> online!</p>
-        <p>See more <a target="_blank" href="https://freecatphotoapp.com">cat photos</a> in our gallery.</p>
-        <a href="https://freecatphotoapp.com"><img src="https://cdn.freecodecamp.org/curriculum/cat-photo-app/relaxing-cat.jpg" alt="A cute orange cat lying on its back."></a>
-      </section>
-      <section>
-        <h2>Cat Lists</h2>
-        <h3>Things cats love:</h3>
-        <ul>
-          <li>catnip</li>
-          <li>laser pointers</li>
-          <li>lasagna</li>
-        </ul>
-        <figure>
-          <img src="https://cdn.freecodecamp.org/curriculum/cat-photo-app/lasagna.jpg" alt="A slice of lasagna on a plate.">
-          <figcaption>Cats <em>love</em> lasagna.</figcaption>  
-        </figure>
-        <h3>Top 3 things cats hate:</h3>
-        <ol>
-          <li>flea treatment</li>
-          <li>thunder</li>
-          <li>other cats</li>
-        </ol>
-        <figure>
-          <img src="https://cdn.freecodecamp.org/curriculum/cat-photo-app/cats.jpg" alt="Two tabby kittens sleeping together on a couch.">
-          <figcaption>Cats <strong>hate</strong> other cats.</figcaption>  
-        </figure>
-      </section>
-      <section>
-        <h2>Cat Form</h2>
-        <form action="https://freecatphotoapp.com/submit-cat-photo">
-          <fieldset>
-            <legend>Is your cat an indoor or outdoor cat?</legend>
-            <label><input id="indoor" type="radio" name="indoor-outdoor" value="indoor" checked> Indoor</label>
-            <label><input id="outdoor" type="radio" name="indoor-outdoor" value="outdoor"> Outdoor</label>
-          </fieldset>
-          <fieldset>
-            <legend>What's your cat's personality?</legend>
-            <input id="loving" type="checkbox" name="personality" value="loving" checked> <label for="loving">Loving</label>
-            <input id="lazy" type="checkbox" name="personality" value="lazy"> <label for="lazy">Lazy</label>
-            <input id="energetic" type="checkbox" name="personality" value="energetic"> <label for="energetic">Energetic</label>
-          </fieldset>
-          <input type="text" name="catphotourl" placeholder="cat photo URL" required>
-          <button type="submit">Submit</button>
-        </form>
-      </section>
-    </main>
-  </body>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tonine Saade — Video Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #1a1410;
+    --bg-warm: #211a14;
+    --bg-card: #2a2118;
+    --text-primary: #f0e6d8;
+    --text-secondary: #b8a898;
+    --text-muted: #7a6d60;
+    --accent: #c4956a;
+    --accent-light: #d4a87a;
+    --accent-dark: #a07850;
+    --border: #3a3028;
+    --grain-opacity: 0.03;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text-primary);
+    font-family: 'DM Sans', sans-serif;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+    opacity: var(--grain-opacity);
+    pointer-events: none;
+    z-index: 1000;
+  }
+
+  /* ---- HERO ---- */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    padding: 2rem;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -20%; left: -20%;
+    width: 140%; height: 140%;
+    background: radial-gradient(ellipse at 30% 50%, rgba(196, 149, 106, 0.08) 0%, transparent 60%),
+                radial-gradient(ellipse at 70% 30%, rgba(160, 120, 80, 0.05) 0%, transparent 50%);
+    animation: warmGlow 12s ease-in-out infinite alternate;
+  }
+
+  @keyframes warmGlow {
+    0% { transform: translate(0, 0) scale(1); }
+    100% { transform: translate(-3%, 2%) scale(1.05); }
+  }
+
+  .hero-line {
+    width: 1px;
+    height: 80px;
+    background: linear-gradient(to bottom, transparent, var(--accent), transparent);
+    margin-bottom: 2.5rem;
+    animation: fadeDown 1.2s ease-out;
+  }
+
+  @keyframes fadeDown {
+    from { opacity: 0; height: 0; }
+    to { opacity: 1; height: 80px; }
+  }
+
+  .hero-name {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3rem, 8vw, 7rem);
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    text-align: center;
+    line-height: 1.1;
+    animation: fadeIn 1.5s ease-out 0.3s both;
+    position: relative;
+  }
+
+  .hero-name span {
+    display: block;
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .hero-subtitle {
+    font-size: clamp(0.85rem, 1.5vw, 1.1rem);
+    font-weight: 300;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-top: 1.5rem;
+    animation: fadeIn 1.5s ease-out 0.8s both;
+  }
+
+  .hero-scroll {
+    position: absolute;
+    bottom: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-muted);
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    animation: fadeIn 2s ease-out 1.5s both;
+  }
+
+  .hero-scroll .arrow {
+    width: 1px;
+    height: 30px;
+    background: var(--accent-dark);
+    position: relative;
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
+
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.3; transform: scaleY(1); }
+    50% { opacity: 1; transform: scaleY(1.3); }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ---- NAV ---- */
+  .nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 1.5rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background 0.4s, backdrop-filter 0.4s;
+  }
+
+  .nav.scrolled {
+    background: rgba(26, 20, 16, 0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    color: var(--text-primary);
+    text-decoration: none;
+    letter-spacing: 0.05em;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.8rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-weight: 400;
+    transition: color 0.3s;
+    position: relative;
+  }
+
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px; left: 0;
+    width: 0; height: 1px;
+    background: var(--accent);
+    transition: width 0.3s;
+  }
+
+  .nav-links a:hover { color: var(--accent-light); }
+  .nav-links a:hover::after { width: 100%; }
+
+  /* ---- SECTION ---- */
+  .section {
+    padding: 6rem 3rem;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 4rem;
+  }
+
+  .section-line {
+    width: 60px;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  .section-label {
+    font-size: 0.75rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-weight: 400;
+    margin-top: 0.5rem;
+    color: var(--text-primary);
+  }
+
+  .section-title em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  /* ---- VIDEO GRID ---- */
+  .video-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 2.5rem;
+  }
+
+  @media (max-width: 500px) {
+    .video-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .video-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1), 
+                box-shadow 0.5s cubic-bezier(0.23, 1, 0.32, 1),
+                border-color 0.4s;
+    position: relative;
+  }
+
+  .video-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.4), 0 0 40px rgba(196, 149, 106, 0.05);
+    border-color: var(--accent-dark);
+  }
+
+  .video-wrapper {
+    position: relative;
+    width: 100%;
+    padding-top: 56.25%;
+    background: #0e0b08;
+  }
+
+  .video-wrapper iframe {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+
+  .video-info {
+    padding: 1.5rem 1.8rem;
+  }
+
+  .video-category {
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.6rem;
+    font-weight: 500;
+  }
+
+  .video-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    font-weight: 400;
+    color: var(--text-primary);
+    margin-bottom: 0.4rem;
+  }
+
+  .video-description {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    font-weight: 300;
+    line-height: 1.6;
+  }
+
+  /* ---- ABOUT ---- */
+  .about-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  @media (max-width: 768px) {
+    .about-content {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+  }
+
+  .about-text p {
+    font-size: 1.05rem;
+    line-height: 1.9;
+    color: var(--text-secondary);
+    font-weight: 300;
+    margin-bottom: 1.5rem;
+  }
+
+  .about-text p:first-child::first-letter {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.5rem;
+    float: left;
+    line-height: 1;
+    margin-right: 0.5rem;
+    color: var(--accent);
+  }
+
+  .about-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+
+  .stat {
+    padding: 1.5rem;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    text-align: center;
+    transition: border-color 0.3s, background 0.3s;
+  }
+
+  .stat:hover {
+    border-color: var(--accent-dark);
+    background: rgba(196, 149, 106, 0.03);
+  }
+
+  .stat-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    color: var(--accent);
+    display: block;
+  }
+
+  .stat-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-top: 0.3rem;
+  }
+
+  /* ---- CONTACT ---- */
+  .contact-section {
+    text-align: center;
+    padding: 8rem 3rem;
+    position: relative;
+  }
+
+  .contact-section::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 50%;
+    transform: translateX(-50%);
+    width: 1px;
+    height: 80px;
+    background: linear-gradient(to bottom, transparent, var(--accent-dark));
+  }
+
+  .contact-cta {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 4vw, 3rem);
+    font-weight: 400;
+    margin-bottom: 2rem;
+    margin-top: 3rem;
+  }
+
+  .contact-cta em { color: var(--accent); }
+
+  .contact-email {
+    display: inline-block;
+    padding: 1rem 3rem;
+    border: 1px solid var(--accent-dark);
+    color: var(--accent-light);
+    text-decoration: none;
+    font-size: 0.85rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    transition: all 0.4s;
+    border-radius: 2px;
+  }
+
+  .contact-email:hover {
+    background: var(--accent);
+    color: var(--bg);
+    border-color: var(--accent);
+  }
+
+  /* ---- FOOTER ---- */
+  .footer {
+    padding: 2rem 3rem;
+    text-align: center;
+    border-top: 1px solid var(--border);
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    letter-spacing: 0.1em;
+  }
+
+  /* ---- REVEAL ANIMATIONS ---- */
+  .reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ---- FEATURED (large card) ---- */
+  .featured-card {
+    grid-column: 1 / -1;
+  }
+
+  .featured-card .video-wrapper {
+    padding-top: 45%;
+  }
+
+  .featured-card .video-info {
+    padding: 2rem 2.5rem;
+  }
+
+  .featured-card .video-title {
+    font-size: 1.6rem;
+  }
+
+  .featured-badge {
+    display: inline-block;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.8rem;
+    border: 1px solid var(--accent-dark);
+    color: var(--accent);
+    border-radius: 2px;
+    margin-bottom: 0.8rem;
+  }
+</style>
+</head>
+<body>
+
+<!-- Nav -->
+<nav class="nav" id="nav">
+  <a href="#" class="nav-logo">T. Saade</a>
+  <ul class="nav-links">
+    <li><a href="#work">Work</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-line"></div>
+  <h1 class="hero-name">
+    Tonine
+    <span>Saade</span>
+  </h1>
+  <p class="hero-subtitle">Videographer &amp; Visual Storyteller</p>
+  <div class="hero-scroll">
+    <span>Scroll</span>
+    <div class="arrow"></div>
+  </div>
+</section>
+
+<!-- Work -->
+<section class="section" id="work">
+  <div class="section-header reveal">
+    <div class="section-line"></div>
+    <div>
+      <span class="section-label">Selected Work</span>
+      <h2 class="section-title">Stories in <em>Motion</em></h2>
+    </div>
+  </div>
+
+  <div class="video-grid">
+    <!-- Featured: C-Pi Boarding School -->
+    <div class="video-card featured-card reveal">
+      <div class="video-wrapper">
+        <iframe src="https://drive.google.com/file/d/1APC2H4C3o2ZkODmR2wiSrIF_komeD4R9/preview" allow="autoplay; encrypted-media" allowfullscreen loading="lazy"></iframe>
+      </div>
+      <div class="video-info">
+        <span class="featured-badge">Featured</span>
+        <div class="video-category">Social Media</div>
+        <h3 class="video-title">C-Pi Boarding School — Dubai</h3>
+        <p class="video-description">A cinematic brand film capturing the essence and atmosphere of C-Pi Boarding School in Dubai.</p>
+      </div>
+    </div>
+
+    <!-- Dolmen 1 -->
+    <div class="video-card reveal">
+      <div class="video-wrapper">
+        <iframe src="https://drive.google.com/file/d/1v8p60i-ELdCnaODs3rE7Q3xGLfNq7vV0/preview" allow="autoplay; encrypted-media" allowfullscreen loading="lazy"></iframe>
+      </div>
+      <div class="video-info">
+        <div class="video-category">Social Media</div>
+        <h3 class="video-title">Dolmen — Vol. I</h3>
+        <p class="video-description">Social media content crafted for Dolmen, blending mood and brand identity.</p>
+      </div>
+    </div>
+
+    <!-- Dolmen 3 -->
+    <div class="video-card reveal">
+      <div class="video-wrapper">
+        <iframe src="https://drive.google.com/file/d/19thrkUBs2fpXwU2cfxgpmbBYEd_8MT5V/preview" allow="autoplay; encrypted-media" allowfullscreen loading="lazy"></iframe>
+      </div>
+      <div class="video-info">
+        <div class="video-category">Social Media</div>
+        <h3 class="video-title">Dolmen — Vol. III</h3>
+        <p class="video-description">Continuing the visual narrative for Dolmen with a refined editorial approach.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- About -->
+<section class="section" id="about">
+  <div class="section-header reveal">
+    <div class="section-line"></div>
+    <div>
+      <span class="section-label">About</span>
+      <h2 class="section-title">The <em>Filmmaker</em></h2>
+    </div>
+  </div>
+
+  <div class="about-content">
+    <div class="about-text reveal">
+      <p>Tonine Saade is a videographer and visual storyteller with a passion for capturing authentic moments and transforming them into compelling narratives. From weddings to social media campaigns, every project is approached with a cinematic eye and meticulous attention to detail.</p>
+      <p>Specializing in brand films, event coverage, and social media content, Tonine brings a warm, editorial aesthetic to every frame — creating videos that don't just document moments, but make you feel them.</p>
+    </div>
+    <div class="about-stats reveal">
+      <div class="stat">
+        <span class="stat-number">2</span>
+        <span class="stat-label">Specialties</span>
+      </div>
+      <div class="stat">
+        <span class="stat-number">∞</span>
+        <span class="stat-label">Stories to Tell</span>
+      </div>
+      <div class="stat">
+        <span class="stat-number">Social</span>
+        <span class="stat-label">Media Content</span>
+      </div>
+      <div class="stat">
+        <span class="stat-number">Wedding</span>
+        <span class="stat-label">Videography</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact -->
+<section class="contact-section" id="contact">
+  <div class="reveal">
+    <span class="section-label">Get in Touch</span>
+    <h2 class="contact-cta">Let's create something <em>beautiful</em></h2>
+    <a href="mailto:toninesaade0@gmail.com" class="contact-email">toninesaade0@gmail.com</a>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  &copy; 2026 Tonine Saade. All rights reserved.
+</footer>
+
+<script>
+  // Nav scroll effect
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 80);
+  });
+
+  // Reveal on scroll
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => {
+          entry.target.classList.add('visible');
+        }, i * 120);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  reveals.forEach(el => observer.observe(el));
+
+  // Smooth scroll for nav links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+</script>
+
+</body>
 </html>
